@@ -1,5 +1,6 @@
 from tkinter import *
 from quiz_brain import QuizBrain
+from tkinter import messagebox
 
 THEME_COLOR = "#375362"
 FONT = ("Arial", 20, "italic")
@@ -63,7 +64,8 @@ class QuizInterface:
 
             self.get_next_question()
         else:
-            self.window.destroy()
+            messagebox.showinfo(title="Quiz finished",
+                                message="The quiz has been finished, you may now exit out from the app")
 
     def disable_buttons(self):
         self.true_button["state"] = "disabled"
