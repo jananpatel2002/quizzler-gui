@@ -38,19 +38,37 @@ class QuizInterface:
         self.canvas.itemconfig(self.canvas_text, text=question_text)
 
     def true_clicked(self):
-        if self.quiz.check_answer() == "true":
-            self.update_scoreboard()
-            self.canvas.config(bg="green")
-        else:
-            self.canvas.config(bg="red")
+        self.on_button_clicked("true")
 
     def false_clicked(self):
-        if self.quiz.check_answer() == "false":
+        self.on_button_clicked("false")
+
+    def on_button_clicked(self, status):
+        if self.quiz.check_answer() == status:
             self.update_scoreboard()
             self.canvas.config(bg="green")
         else:
             self.canvas.config(bg="red")
+        self.disable_buttons()
+        self.window.after(ms=1000, func=self.change_canvas_to_white)  # This also changes the question if available
 
     def update_scoreboard(self):
         self.quiz.score += 1
         self.score_label.config(text=f"Score: {self.quiz.score}")
+
+    def change_canvas_to_white(self):
+        self.enable_buttons()
+        self.canvas.config(bg="white")
+        if self.quiz.still_has_questions():
+
+            self.get_next_question()
+        else:
+            self.window.destroy()
+
+    def disable_buttons(self):
+        self.true_button["state"] = "disabled"
+        self.false_button["state"] = "disabled"
+
+    def enable_buttons(self):
+        self.true_button["state"] = "normal"
+        self.false_button["state"] = "normal"

@@ -17,4 +17,4 @@ class QuizBrain:
 
     def check_answer(self) -> str:
         print(self.current_question.answer.lower())
-        return self.current_question.answer.lower() + 1
+        return self.current_question.answer.lower()
