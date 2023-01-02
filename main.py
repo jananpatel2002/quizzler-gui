@@ -11,13 +11,12 @@ for question in question_data:
     new_question = Question(question_text, question_answer)
     question_bank.append(new_question)
 
-quiz = QuizBrain(question_bank)
-print(question_bank)
-gui = QuizInterface()
+quiz_brain = QuizBrain(question_bank)
+gui = QuizInterface(quiz_brain)
 
-#
-# while quiz.still_has_questions():
-#     quiz.next_question()
+# while quiz_brain.still_has_questions():
+#     question = quiz_brain.next_question()
+#     gui.canvas.itemconfig(gui.canvas_text, text=question.text)
 
 # print("You've completed the quiz")
 # print(f"Your final score was: {quiz.score}/{quiz.question_number}")
